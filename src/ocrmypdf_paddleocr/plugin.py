@@ -278,14 +278,27 @@ class PaddleOCREngine(OcrEngine):
                 # Convert to bounding box and apply scaling to map back to original image
                 import numpy as np
                 if isinstance(poly, np.ndarray):
-                    xs = (poly[:, 0] * scale_x).astype(int)
-                    ys = (poly[:, 1] * scale_y).astype(int)
+                    # Apply scaling to map back to original image
+                    poly_scaled = poly * [scale_x, scale_y]
+
+                    # For horizontal bounds, use min/max
+                    x_min = int(poly_scaled[:, 0].min())
+                    x_max = int(poly_scaled[:, 0].max())
+
+                    # For vertical bounds, use polygon edges for tighter fit
+                    # For 4-point polygons: points 0-1 are top edge, points 2-3 are bottom edge
+                    if len(poly_scaled) == 4:
+                        y_min = int((poly_scaled[0][1] + poly_scaled[1][1]) / 2)
+                        y_max = int((poly_scaled[2][1] + poly_scaled[3][1]) / 2)
+                    else:
+                        # Fallback to min/max for non-standard polygons
+                        y_min = int(poly_scaled[:, 1].min())
+                        y_max = int(poly_scaled[:, 1].max())
                 else:
                     # Fallback if not numpy array
                     xs = [int(point[0] * scale_x) for point in poly]
                     ys = [int(point[1] * scale_y) for point in poly]
-
-                x_min, y_min, x_max, y_max = min(xs), min(ys), max(xs), max(ys)
+                    x_min, y_min, x_max, y_max = min(xs), min(ys), max(xs), max(ys)
 
                 conf_pct = int(score * 100)
 
