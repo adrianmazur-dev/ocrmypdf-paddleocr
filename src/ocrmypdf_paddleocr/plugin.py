@@ -53,6 +53,10 @@ def add_options(parser):
         help='Path to text recognition model directory',
     )
     paddle.add_argument(
+        '--paddle-rec-model-name',
+        help='Text recognition model name'
+    )
+    paddle.add_argument(
         '--paddle-cls-model-dir',
         metavar='DIR',
         help='Path to text orientation classification model directory',
@@ -170,6 +174,8 @@ class PaddleOCREngine(OcrEngine):
             kwargs['text_detection_model_dir'] = options.paddle_det_model_dir
         if hasattr(options, 'paddle_rec_model_dir') and options.paddle_rec_model_dir:
             kwargs['text_recognition_model_dir'] = options.paddle_rec_model_dir
+        if hasattr(options, 'paddle_rec_model_name') and options.paddle_rec_model_name:
+            kwargs['text_recognition_model_name'] = options.paddle_rec_model_name
         if hasattr(options, 'paddle_cls_model_dir') and options.paddle_cls_model_dir:
             kwargs['textline_orientation_model_dir'] = options.paddle_cls_model_dir
 
