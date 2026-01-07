@@ -91,6 +91,7 @@ class PaddleOCREngine(OcrEngine):
         'tur': 'tr',
         'vie': 'vi',
         'tha': 'th',
+        'pol': 'latin',
     }
 
     @staticmethod
