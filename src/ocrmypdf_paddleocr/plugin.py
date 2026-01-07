@@ -119,9 +119,9 @@ class PaddleOCREngine(OcrEngine):
         return {
             'en', 'ch', 'chinese_cht', 'ta', 'te', 'ka', 'latin', 'ar', 'cy', 'da',
             'de', 'es', 'et', 'fr', 'ga', 'hi', 'it', 'ja', 'ko', 'la', 'nl', 'no',
-            'oc', 'pt', 'ro', 'ru', 'sr', 'sv', 'tr', 'uk', 'vi',
+            'oc', 'pt', 'ro', 'ru', 'sr', 'sv', 'tr', 'uk', 'vi', 'pl',
             # Also include common Tesseract codes for compatibility
-            'eng', 'chi_sim', 'chi_tra', 'deu', 'fra', 'spa', 'rus', 'jpn', 'kor'
+            'eng', 'chi_sim', 'chi_tra', 'deu', 'fra', 'spa', 'rus', 'jpn', 'kor', 'pol'
         }
 
     @staticmethod
