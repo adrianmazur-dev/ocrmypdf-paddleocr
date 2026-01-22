@@ -48,6 +48,10 @@ def add_options(parser):
         help='Path to text detection model directory',
     )
     paddle.add_argument(
+        '--paddle-det-model-name',
+        help='Text detection model name'
+    )
+    paddle.add_argument(
         '--paddle-rec-model-dir',
         metavar='DIR',
         help='Path to text recognition model directory',
@@ -172,6 +176,8 @@ class PaddleOCREngine(OcrEngine):
         # Add model directories if specified
         if hasattr(options, 'paddle_det_model_dir') and options.paddle_det_model_dir:
             kwargs['text_detection_model_dir'] = options.paddle_det_model_dir
+        if hasattr(options, 'paddle_det_model_name') and options.paddle_det_model_name:
+            kwargs['text_detection_model_name'] = options.paddle_det_model_name
         if hasattr(options, 'paddle_rec_model_dir') and options.paddle_rec_model_dir:
             kwargs['text_recognition_model_dir'] = options.paddle_rec_model_dir
         if hasattr(options, 'paddle_rec_model_name') and options.paddle_rec_model_name:
